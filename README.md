@@ -59,7 +59,7 @@ has_one    :address
 | house_number            | string     | null: false                    |
 | building_name           | string     |                                |
 | phone_number            | string     | null: false                    |
-| record                  | references | null: false, unique: true      |
+| record                  | references | null: false, foreign_key: true |
 
 ### Association
 
