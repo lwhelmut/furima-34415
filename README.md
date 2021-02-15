@@ -12,7 +12,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchases
+- has_many :records
 
 ## itemsテーブル
 | Column                            | Type       | Options                        |
@@ -24,25 +24,36 @@
 | shipping_price_responsibility     | text       | null: false                    |
 | region                            | text       | null: false                    |
 | shipping_date_forecast            | text       | null: false                    |
-| user                              | references | null: false, foreign_key: true |
+| seller                            | references | null: false, foreign_key: true |
 
 
 ### Association
 
 belongs_to :user
-has_one    :purchase
+has_one    :record
 
 
-## purchasesテーブル
+## recordsテーブル
 | Column                  | Type       | Options                        |
 | --------------------    | ---------- | ------------------------------ |
 | credit_card_info        | integer    | null: false                    |
-| shipping_address        | string     | null: false                    |
-| phone_number            | string     | null: false                    |
-| user                    | references | null: false, foreign_key: true |
+| purchased_user          | references | null: false, foreign_key: true |
 | item                    | references | null: false, foreign_key: true |
 
 ### Association
 
 belongs_to :user
 belongs_to :item
+has_one    :shipping_info
+
+
+## shipping_info
+| Column                  | Type       | Options                        |
+| --------------------    | ---------- | ------------------------------ |
+| shipping_address        | string     | null: false                    |
+| phone_number            | string     | null: false                    |
+| record                  | references | null: false, unique: true      |
+
+### Association
+
+belongs_to :record
