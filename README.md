@@ -1,24 +1,48 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
+| Column          | Type    | Options     |
+| --------        | ------  | ----------- |
+| nickname        | string  | null: false |
+| email           | string  | null: false |
+| password        | string  | null: false |
+| name            | string  | null: false |
+| birth_date      | integer | null: false |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :items
+- has_many :purchases
 
-* System dependencies
+## itemsテーブル
+| Column                            | Type       | Options                        |
+| -------------------------------   | ---------- | -----------------------------  |
+| item_name                         | text       | null: false                    |
+| category                          | text       | null: false                    |
+| item_price                        | text       | null: false                    |
+| item_status                       | text       | null: false                    |
+| shipping_price_responsibility     | text       | null: false                    |
+| region                            | text       | null: false                    |
+| shipping_date_forecast            | text       | null: false                    |
+| user                              | references | null: false, foreign_key: true |
 
-* Configuration
 
-* Database creation
+### Association
 
-* Database initialization
+belongs_to :user
+has_one    :purchase
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchasesテーブル
+| Column                  | Type       | Options                        |
+| --------------------    | ---------- | ------------------------------ |
+| credit_card_info        | integer    | null: false                    |
+| shipping_address        | string     | null: false                    |
+| phone_number            | string     | null: false                    |
+| user                    | references | null: false, foreign_key: true |
+| item                    | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
 
-* ...
+belongs_to :user
+belongs_to :item
