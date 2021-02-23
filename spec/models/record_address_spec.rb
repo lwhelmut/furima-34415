@@ -4,7 +4,7 @@ RSpec.describe RecordAddress, type: :model do
   describe '購入者の情報保存' do
     before do
     user = FactoryBot.create(:user)
-    item = FactoryBot.build(:item)
+    item = FactoryBot.create(:item)
     @record_address = FactoryBot.build(:record_address, user_id: user.id, item_id: item.id)
     end
 
@@ -63,6 +63,16 @@ RSpec.describe RecordAddress, type: :model do
         @record_address.token = nil
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空だと保存できないこと' do
+        @record_address.user_id = ''
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと保存できないこと' do
+        @record_address.item_id = ''
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
