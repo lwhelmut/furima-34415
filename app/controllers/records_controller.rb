@@ -34,7 +34,7 @@ class RecordsController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    unless @item.user_id != current_user.id
+    unless @item.user_id != current_user.id && @item.record.blank?
       redirect_to root_path
     end
   end
